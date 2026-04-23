@@ -22,7 +22,7 @@ export const Navigation = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        setMovieSearch();
+        setMovieSearch(data.);
       });
   }, []);
   return (
