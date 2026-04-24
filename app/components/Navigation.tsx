@@ -39,6 +39,9 @@ export const Navigation = () => {
             <button
               onClick={() => {
                 setIsVisible(!isVisible);
+                if (isVisible) {
+                  setIsVisible(false);
+                }
               }}
               className="py-2 px-4 border rounded-lg border-[#E4E4E7] flex items-center justify-center gap-2"
             >
@@ -52,8 +55,11 @@ export const Navigation = () => {
               <input
                 onChange={(e) => {
                   setSearch(e.target.value);
+                  if (isVisible) {
+                    setIsVisible(false);
+                  }
                 }}
-                className="w-83.25 outline-0"
+                className={`w-83.25 outline-0 `}
                 placeholder="search.."
               ></input>
             </div>
@@ -93,48 +99,58 @@ export const Navigation = () => {
                 ))}
               </div>
             </div>
-            <div className="w-[577px] bg-white border border-[#E4E4E7] rounded-lg min-h-[128] absolute top-13 p-3">
-              {movieSearch.slice(0, 5).map((movie) => (
-                <div key={movie.id} className="p-2 space-y-2 flex gap-4">
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    className="h-[100px] w-[67px] object-cover transition-transform group-hover:scale-105 rounded-md"
-                  />
+            {movieSearch.length === 0 && search !== "" ? (
+              <div
+                className={`w-[577px] flex justify-center items-center bg-white border border-[#E4E4E7] rounded-lg min-h-[88px] absolute top-13 p-6 text-[14px] ${search !== "" && movieSearch.length === 0 ? "visible" : "invisible"} ${search.length > 0 ? "visible" : "invisible"}`}
+              >
+                No results found.
+              </div>
+            ) : (
+              <div
+                className={`w-[577px] bg-white border border-[#E4E4E7] rounded-lg min-h-[128] absolute top-13 p-3 ${search.length > 0 ? "visible" : "invisible"}`}
+              >
+                {movieSearch.slice(0, 5).map((movie) => (
+                  <div key={movie.id} className="p-2 space-y-2 flex gap-4">
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                      className="h-[100px] w-[67px] object-cover transition-transform group-hover:scale-105 rounded-md"
+                    />
 
-                  <div className="space-y-3">
-                    <div>
-                      <h1 className="text-[20px] font-semibold">
-                        {movie.title}
-                      </h1>
+                    <div className="space-y-3">
+                      <div>
+                        <h1 className="text-[20px] font-semibold">
+                          {movie.title}
+                        </h1>
 
-                      <Star star={movie} />
-                    </div>
-                    <div className="flex gap-70">
-                      <p>{movie.release_date.split("-")[0]}</p>
-                      <button className="flex items-center gap-3">
-                        See more
-                        <span>
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 16 16"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M3.33301 7.99967H12.6663M12.6663 7.99967L7.99967 3.33301M12.6663 7.99967L7.99967 12.6663"
-                              stroke="#18181B"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </span>
-                      </button>
+                        <Star star={movie} />
+                      </div>
+                      <div className="flex gap-70">
+                        <p>{movie.release_date.split("-")[0]}</p>
+                        <button className="flex items-center gap-3">
+                          See more
+                          <span>
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M3.33301 7.99967H12.6663M12.6663 7.99967L7.99967 3.33301M12.6663 7.99967L7.99967 12.6663"
+                                stroke="#18181B"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </span>
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
           <div>
             <svg
