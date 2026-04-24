@@ -2,11 +2,13 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Genres, Movie, MovieSearch } from "../types";
 import { Star } from "./Star";
+import axios from "axios";
 
 export const Navigation = () => {
   const [genres, setGenres] = useState<Genres[]>([]);
   const [isVisible, setIsVisible] = useState(false);
   const [movieSearch, setMovieSearch] = useState<MovieSearch[]>([]);
+  const [search, setSearch] = useState<string>("");
 
   useEffect(() => {
     fetch(
@@ -18,14 +20,12 @@ export const Navigation = () => {
       });
   }, []);
   useEffect(() => {
-    fetch(
-      "https://api.themoviedb.org/3/discover/movie?api_key=d67d8bebd0f4ff345f6505c99e9d0289",
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setMovieSearch(data.results);
-      });
-  }, []);
+    axios
+      .get(
+        `https://api.themoviedb.org/3/search/movie?query=${search}&api_key=d67d8bebd0f4ff345f6505c99e9d0289`,
+      )
+      .then((res) => setMovieSearch(res.data.results));
+  }, [search]);
 
   return (
     <div className="py-[11.5px] ">
@@ -50,6 +50,9 @@ export const Navigation = () => {
               <img className="w-4" src="/search.svg" alt="search" />
 
               <input
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
                 className="w-83.25 outline-0"
                 placeholder="search.."
               ></input>
@@ -106,9 +109,27 @@ export const Navigation = () => {
 
                       <Star star={movie} />
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex gap-70">
                       <p>{movie.release_date.split("-")[0]}</p>
-                      <button>See more</button>
+                      <button className="flex items-center gap-3">
+                        See more
+                        <span>
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M3.33301 7.99967H12.6663M12.6663 7.99967L7.99967 3.33301M12.6663 7.99967L7.99967 12.6663"
+                              stroke="#18181B"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </span>
+                      </button>
                     </div>
                   </div>
                 </div>
