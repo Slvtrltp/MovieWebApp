@@ -12,8 +12,15 @@ export const Card = ({ upcom }: { upcom: Movie }) => {
           src={`https://image.tmdb.org/t/p/w500${upcom.poster_path}`}
           alt=""
         />
-        <Star star={upcom} />
-        <p>{upcom.title}</p>
+        <Star
+          star={upcom}
+          font="text-[14px]"
+          color="text-black"
+          tfont="text-[12px]"
+          size="14px"
+          tcolor="text-[#71717A]"
+        />
+        <p className="pl-2">{upcom.title}</p>
       </div>
     </div>
   );

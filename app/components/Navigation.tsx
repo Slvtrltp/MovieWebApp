@@ -11,14 +11,12 @@ export const Navigation = () => {
   const [search, setSearch] = useState<string>("");
 
   useEffect(() => {
-    fetch(
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=d67d8bebd0f4ff345f6505c99e9d0289",
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setGenres(data.genres);
-      });
-  }, []);
+    axios
+      .get(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=d67d8bebd0f4ff345f6505c99e9d0289`,
+      )
+      .then((res) => setGenres(res.data.genres));
+  }, [genres]);
   useEffect(() => {
     axios
       .get(
@@ -65,7 +63,7 @@ export const Navigation = () => {
             </div>
             <div
               data-shown={isVisible}
-              className="invisible opacity-0 p-5 border border-[#E4E4E7] bg-white rounded-lg absolute w-144.25 duration-300 top-13  data-[shown=true]:visible data-[shown=true]:opacity-100"
+              className="invisible z-2 opacity-0 p-5 border border-[rgb(228,228,231)] bg-white rounded-lg absolute w-144.25 duration-300 top-13  data-[shown=true]:visible data-[shown=true]:opacity-100"
             >
               <h1 className="text-[24px] font-semibold text-[#09090B]">
                 Genres
@@ -101,13 +99,13 @@ export const Navigation = () => {
             </div>
             {movieSearch.length === 0 && search !== "" ? (
               <div
-                className={`w-[577px] flex justify-center items-center bg-white border border-[#E4E4E7] rounded-lg min-h-[88px] absolute top-13 p-6 text-[14px] ${search !== "" && movieSearch.length === 0 ? "visible" : "invisible"} ${search.length > 0 ? "visible" : "invisible"}`}
+                className={`w-[577px] z-2 flex justify-center items-center bg-white border border-[#E4E4E7] rounded-lg min-h-[88px] absolute top-13 p-6 text-[14px] ${search !== "" && movieSearch.length === 0 ? "visible" : "invisible"} ${search.length > 0 ? "visible" : "invisible"}`}
               >
                 No results found.
               </div>
             ) : (
               <div
-                className={`w-[577px] bg-white border border-[#E4E4E7] rounded-lg min-h-[128] absolute top-13 p-3 ${search.length > 0 ? "visible" : "invisible"}`}
+                className={`w-[577px] z-2 bg-white border border-[#E4E4E7] rounded-lg min-h-[128] absolute top-13 p-3 ${search.length > 0 ? "visible" : "invisible"}`}
               >
                 {movieSearch.slice(0, 5).map((movie) => (
                   <div key={movie.id} className="p-2 space-y-2 flex gap-4">
