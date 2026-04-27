@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import axios from "axios";
 import { Star } from "./Star";
+import { SwiperM } from "./Swiper";
 
 export const Upcoming = () => {
   const [upcoming, setUpcoming] = useState<Movie[]>([]);
@@ -37,46 +38,8 @@ export const Upcoming = () => {
         className="h-[800px] w-full object-cover"
       >
         {upcoming.slice(0, 5).map((trend) => (
-          <SwiperSlide key={trend.id} className="relative w-full h-full">
-            <img
-              className="w-full h-200 absolute bg-center object-cover z-0 "
-              src={`https://image.tmdb.org/t/p/original${trend.backdrop_path}`}
-              alt=""
-            />
-            <div className="absolute bottom-0 left-0 pl-35 pt-62.5 z-10 inset-0 gap-4">
-              <div>
-                <p className="text-[18px] text-white">Now Playing:</p>
-                <h1 className="text-[36px] font-bold text-white">
-                  {trend.title}
-                </h1>
-                <Star
-                  star={trend}
-                  font="text-[18px]"
-                  size="20px"
-                  color="text-white"
-                  tcolor="text-[#71717A]"
-                  tfont="text-[16px]"
-                />
-              </div>
-              <p className="w-92.5 text-white pb-4">{trend.overview} </p>
-              <button className="flex bg-white items-center gap-2 py-2 px-4 rounded-lg ">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3.33301 2L12.6663 8L3.33301 14V2Z"
-                    stroke="#18181B"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                Watch Trailer
-              </button>
-            </div>
+          <SwiperSlide key={trend.id}>
+            <SwiperM trend={trend} key={trend.id} />
           </SwiperSlide>
         ))}
       </Swiper>

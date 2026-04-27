@@ -42,14 +42,14 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col h-screen w-full">
+    <div className="flex flex-col w-full">
       <Navigation />
       <Upcoming />
-      <div className=" w-full h-screen flex items-center flex-col ">
+      <div className="w-full h-full flex items-center flex-col">
         <div className="flex justify-start w-full pl-72 h-60 items-center p-10 text-[24px] font-semibold">
           Upcoming
         </div>
-        <div className="grid grid-cols-5 grid-rows-2  h-screen gap-10">
+        <div className="grid grid-cols-5 grid-rows-2 gap-10">
           {upcoming.slice(0, 10).map((upcom) => (
             <Card key={upcom.id} upcom={upcom} />
           ))}
@@ -57,7 +57,7 @@ export default function Home() {
         <div className="flex justify-start w-full pl-72 h-60 items-center p-10 text-[24px] font-semibold">
           Popular
         </div>
-        <div className="grid grid-cols-5 grid-rows-2  h-screen gap-10">
+        <div className="grid grid-cols-5 grid-rows-2 gap-10">
           {popular.slice(0, 10).map((upcom) => (
             <Card key={upcom.id} upcom={upcom} />
           ))}
@@ -65,13 +65,13 @@ export default function Home() {
         <div className="flex justify-start w-full pl-72 h-60 items-center p-10 text-[24px] font-semibold">
           Top Rated
         </div>
-        <div className="grid grid-cols-5 grid-rows-2  h-screen gap-10">
+        <div className="grid grid-cols-5 grid-rows-2 gap-10">
           {topRated.slice(0, 10).map((upcom) => (
             <Card key={upcom.id} upcom={upcom} />
           ))}
         </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 }

@@ -37,3 +37,15 @@ export type MovieSearch = {
   vote_average: number;
   vote_count: number;
 };
+export type VideoResult = {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string; // you can narrow this later if needed
+  official: boolean;
+  published_at: string; // or Date if you parse it
+  id: string;
+};
