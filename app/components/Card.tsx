@@ -4,7 +4,7 @@ import { Movie } from "../types";
 
 export const Card = ({ upcom }: { upcom: Movie }) => {
   return (
-    <div className="w-[300.73px] h-[480px] bg-[#f4f4f5] rounded-xl overflow-hidden">
+    <div className="w-[300.73px] h-[480px] bg-[#f4f4f5] rounded-xl overflow-hidden shadow-lg">
       <div></div>
       <div>
         <img

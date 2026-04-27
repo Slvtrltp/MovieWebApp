@@ -6,6 +6,7 @@ import { Card } from "./components/Card";
 import { useEffect, useState } from "react";
 import { Genres, Movie } from "./types";
 import axios from "axios";
+import { Footer } from "./components/Footer";
 
 export default function Home() {
   const [upcoming, setUpcoming] = useState<Movie[]>([]);
@@ -41,7 +42,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="">
+    <div className="flex flex-col">
       <Navigation />
       <Upcoming />
       <div className=" w-full h-screen flex items-center flex-col ">
@@ -69,6 +70,7 @@ export default function Home() {
             <Card key={upcom.id} upcom={upcom} />
           ))}
         </div>
+        <Footer />
       </div>
     </div>
   );
