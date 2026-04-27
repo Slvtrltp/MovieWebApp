@@ -42,7 +42,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-screen w-full">
       <Navigation />
       <Upcoming />
       <div className=" w-full h-screen flex items-center flex-col ">

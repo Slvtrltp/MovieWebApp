@@ -39,11 +39,11 @@ export const Upcoming = () => {
         {upcoming.slice(0, 5).map((trend) => (
           <SwiperSlide key={trend.id} className="relative w-full h-full">
             <img
-              className="w-full h-[800px] absolute bg-center object-cover z-0 "
+              className="w-full h-200 absolute bg-center object-cover z-0 "
               src={`https://image.tmdb.org/t/p/original${trend.backdrop_path}`}
               alt=""
             />
-            <div className="absolute bottom-0 left-0 pl-[140px] pt-[250px] z-10 inset-0 gap-4">
+            <div className="absolute bottom-0 left-0 pl-35 pt-62.5 z-10 inset-0 gap-4">
               <div>
                 <p className="text-[18px] text-white">Now Playing:</p>
                 <h1 className="text-[36px] font-bold text-white">
@@ -58,7 +58,7 @@ export const Upcoming = () => {
                   tfont="text-[16px]"
                 />
               </div>
-              <p className="w-[370px] text-white pb-4">{trend.overview} </p>
+              <p className="w-92.5 text-white pb-4">{trend.overview} </p>
               <button className="flex bg-white items-center gap-2 py-2 px-4 rounded-lg ">
                 <svg
                   width="16"
