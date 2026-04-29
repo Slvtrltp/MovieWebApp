@@ -43,7 +43,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col w-full">
-      <Navigation />
+      <Navigation url="details/" />
       <Upcoming />
       <div className="w-full h-full flex items-center flex-col">
         <div className="flex justify-start w-full pl-72 h-60 items-center p-10 text-[24px] font-semibold">

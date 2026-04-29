@@ -1,10 +1,10 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Genres, Movie, MovieSearch } from "../types";
+import { Genres, Movie, MovieDetails, MovieSearch } from "../types";
 import { Star } from "./Star";
 import axios from "axios";
 
-export const Navigation = () => {
+export const Navigation = ({ url }: { url: string }) => {
   const [genres, setGenres] = useState<Genres[]>([]);
   const [isVisible, setIsVisible] = useState(false);
   const [movieSearch, setMovieSearch] = useState<MovieSearch[]>([]);
@@ -107,7 +107,11 @@ export const Navigation = () => {
                 className={`w-[577px] bg-white border border-[#E4E4E7] rounded-lg min-h-[128] absolute z-2 top-13 p-3 ${search.length > 0 ? "visible" : "invisible"}`}
               >
                 {movieSearch.slice(0, 5).map((movie) => (
-                  <div key={movie.id} className="p-2 space-y-2 flex gap-4 ">
+                  <Link
+                    href={`${url}/${movie.id}`}
+                    key={movie.id}
+                    className="p-2 space-y-2 flex gap-4 "
+                  >
                     <img
                       src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                       className="h-[100px] w-[67px] object-cover transition-transform group-hover:scale-105 rounded-md"
@@ -151,7 +155,7 @@ export const Navigation = () => {
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}

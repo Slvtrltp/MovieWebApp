@@ -8,12 +8,15 @@ import { useParams } from "next/navigation";
 
 import React, { useEffect, useState } from "react";
 import { Card } from "@/app/components/Card";
+import { Cardinfo } from "@/app/components/Cardinfo";
 
 export default function Home() {
   const [movie, setMovie] = useState<MovieDetails | null>(null);
   const { id } = useParams();
   const [genres, setGenres] = useState<MovieDetails[]>([]);
   const [more, setMore] = useState<Morelike[]>([]);
+
+  const url = "";
 
   useEffect(() => {
     axios
@@ -45,7 +48,7 @@ export default function Home() {
   return (
     <div className="w-full">
       <div>
-        <Navigation />
+        <Navigation url="" />
       </div>
 
       <div className=" flex justify-between px-70 space-y-6 mt-13">
@@ -121,7 +124,7 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-5 w-[2100px] w-fit px-70 mt-8 gap-11">
         {more.slice(0, 5).map((more) => (
-          <Card upcom={more} key={more.id} />
+          <Cardinfo upcom={more} key={more.id} />
         ))}
       </div>
       <div>
