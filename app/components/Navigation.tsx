@@ -28,7 +28,7 @@ export const Navigation = () => {
   }, [search]);
 
   return (
-    <div className="px-31 py-[11.5px] ">
+    <div className="px-50 py-[11.5px] ">
       <div className="  mx-auto ">
         <div className="flex justify-between  ">
           <Link href={"/"} className="flex gap-2 items-center">
@@ -46,7 +46,7 @@ export const Navigation = () => {
               Genre
               <p className="text-sm w-10.25 h-5"></p>
             </button>
-            <div className="flex gap-2.5 border rounded-lg border-[#E4E4E7] w-94 h-9 pl-3 pr-3">
+            <div className="py-2 px-4 flex gap-2.5 border rounded-lg border-[#E4E4E7] w-94 h-9 pl-3 pr-3">
               <img className="w-4" src="/search.svg" alt="search" />
 
               <input
@@ -119,7 +119,14 @@ export const Navigation = () => {
                           {movie.title}
                         </h1>
 
-                        <Star star={movie} />
+                        <Star
+                          star={movie.vote_average}
+                          font="text-[14px]"
+                          color="text-black"
+                          tfont="text-[12px]"
+                          size="14px"
+                          tcolor="text-[#71717A]"
+                        />
                       </div>
                       <div className="flex gap-70">
                         <p>{movie.release_date.split("-")[0]}</p>

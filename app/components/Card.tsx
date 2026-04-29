@@ -1,11 +1,14 @@
 import React from "react";
 import { Star } from "./Star";
 import { Movie } from "../types";
+import Link from "next/link";
 
 export const Card = ({ upcom }: { upcom: Movie }) => {
   return (
-    <div className="w-[300.73px] h-[480px] bg-[#f4f4f5] rounded-xl overflow-hidden shadow-lg">
-      <div></div>
+    <Link
+      href={`details/${upcom.id}`}
+      className="w-[300.73px] h-[480px] bg-[#f4f4f5] rounded-xl overflow-hidden shadow-lg"
+    >
       <div>
         <img
           className="w-full h-[380px]"
@@ -13,7 +16,7 @@ export const Card = ({ upcom }: { upcom: Movie }) => {
           alt=""
         />
         <Star
-          star={upcom}
+          star={upcom?.vote_average}
           font="text-[14px]"
           color="text-black"
           tfont="text-[12px]"
@@ -22,6 +25,6 @@ export const Card = ({ upcom }: { upcom: Movie }) => {
         />
         <p className="pl-2">{upcom.title}</p>
       </div>
-    </div>
+    </Link>
   );
 };

@@ -1,24 +1,17 @@
 import React from "react";
 import { Movie, MovieSearch } from "../types";
 
-interface StarProps {
-  star: number;
-  width: string;
-  color: string;
-  fontSize: string;
+type StarProps = {
+  font: string;
+  star: number | undefined;
   size: string;
-}
+  color: string;
+  tfont: string;
+  tcolor: string;
+  weight: string;
+};
 
-export const Star = ({
-  font = "text-[14px]",
-  color = "text-black",
-  tfont = "text-[12px]",
-  size = "14px",
-  tcolor = "text-[#71717A]",
-  star,
-}: {
-  StarProps: MovieSearch;
-}) => {
+export const Star = ({ font, color, tfont, size, tcolor, star, weight }: StarProps) => {
   return (
     <div className="flex gap-1 items-center p-2">
       <svg
@@ -37,9 +30,7 @@ export const Star = ({
         />
       </svg>
       <p className="text-center">
-        <span className={`${font} ${color}`}>
-          {(star?.vote_average).toFixed(2)}
-        </span>
+        <span className={`${font} ${color} ${weight}`}>{star?.toFixed(1)}</span>
         <span className={`${tfont} ${tcolor}`}>/10</span>
       </p>
     </div>

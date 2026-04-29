@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Movie, VideoResult } from "../types";
+import { Star } from "./Star";
 
 import {
   Dialog,
@@ -7,7 +8,6 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Star } from "lucide-react";
 import axios from "axios";
 
 export const SwiperM = ({ trend }: { trend: Movie }) => {
@@ -39,7 +39,7 @@ export const SwiperM = ({ trend }: { trend: Movie }) => {
           <p className="text-[18px] text-white">Now Playing:</p>
           <h1 className="text-[36px] font-bold text-white">{trend.title}</h1>
           <Star
-            star={trend}
+            star={trend?.vote_average}
             font="text-[18px]"
             size="20px"
             color="text-white"
