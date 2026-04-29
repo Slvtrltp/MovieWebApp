@@ -28,9 +28,9 @@ export const Navigation = () => {
   }, [search]);
 
   return (
-    <div className="py-[11.5px] ">
-      <div className="container mx-auto ">
-        <div className="flex justify-between ">
+    <div className="px-31 py-[11.5px] ">
+      <div className="  mx-auto ">
+        <div className="flex justify-between  ">
           <Link href={"/"} className="flex gap-2 items-center">
             <img className="w-5" src="/logo.svg" alt="logo" />
             <p className="text-[#4338CA] font-semibold italic">Movie Z</p>

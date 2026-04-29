@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Movie, VideoResult } from "../types";
-import axios from "axios";
-import { Button } from "@/components/ui/button";
+
 import {
   Dialog,
   DialogContent,
@@ -9,9 +8,11 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Star } from "lucide-react";
+import axios from "axios";
 
 export const SwiperM = ({ trend }: { trend: Movie }) => {
   const [trailer, setTrailer] = useState<VideoResult[]>([]);
+
   useEffect(() => {
     axios
       .get(
@@ -20,20 +21,20 @@ export const SwiperM = ({ trend }: { trend: Movie }) => {
       .then((res) => {
         const trailers = res.data.results.filter(
           (video: VideoResult) =>
-            video.type === "Trailer" && video.site === "Youtube",
+            video.type === "Trailer" && video.site === "YouTube",
         );
         setTrailer(trailers);
       });
   }, []);
 
   return (
-    <div>
+    <div className="relative">
       <img
         className="w-full h-200 absolute bg-center object-cover z-0 "
         src={`https://image.tmdb.org/t/p/original${trend.backdrop_path}`}
         alt=""
       />
-      <div className="absolute bottom-0 left-0 pl-35 pt-62.5 z-10 inset-0 gap-4">
+      <div className="absolute bottom-0 left-40  z-2 gap-4 top-60">
         <div>
           <p className="text-[18px] text-white">Now Playing:</p>
           <h1 className="text-[36px] font-bold text-white">{trend.title}</h1>
@@ -69,15 +70,17 @@ export const SwiperM = ({ trend }: { trend: Movie }) => {
             </button>
           </DialogTrigger>
           <DialogContent
-            className="min-w-5xl w-full p-0 overflow-hidden"
+            className="min-w-5xl w-full  p-0 overflow-hidden"
             showCloseButton={false}
           >
-            <DialogHeader className="flex">
-              <div className="w-full aspect-video">
+            <DialogHeader>
+              <div className=" aspect-video">
                 <iframe
                   src={`https://www.youtube.com/embed/${trailer[0]?.key}?autoplay=0`}
                   allowFullScreen
                   className="w-full h-full rounded-md"
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 ></iframe>
               </div>
             </DialogHeader>
