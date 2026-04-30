@@ -12,6 +12,7 @@ import "swiper/css/pagination";
 import axios from "axios";
 import { Star } from "./Star";
 import { SwiperM } from "./Swiper";
+import "./style.css";
 
 export const Upcoming = () => {
   const [upcoming, setUpcoming] = useState<Movie[]>([]);

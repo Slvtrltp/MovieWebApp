@@ -16,8 +16,6 @@ export default function Home() {
   const [genres, setGenres] = useState<MovieDetails[]>([]);
   const [more, setMore] = useState<Morelike[]>([]);
 
-  const url = "";
-
   useEffect(() => {
     axios
       .get(

@@ -6,12 +6,27 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import axios from "axios";
+import { useSwiper } from "swiper/react";
 
 export const SwiperM = ({ trend }: { trend: Movie }) => {
   const [trailer, setTrailer] = useState<VideoResult[]>([]);
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const swiper = useSwiper();
+
+  const handlePlayer = (open: boolean) => {
+    setIsActive(open);
+    if (swiper) {
+      if (open) {
+        swiper.autoplay.stop();
+      } else {
+        swiper.autoplay.start();
+      }
+    }
+  };
 
   useEffect(() => {
     axios
@@ -49,9 +64,9 @@ export const SwiperM = ({ trend }: { trend: Movie }) => {
         </div>
         <p className="w-92.5 text-white pb-4">{trend.overview}</p>
 
-        <Dialog>
+        <Dialog open={isActive} onOpenChange={handlePlayer}>
           <DialogTrigger asChild>
-            <button className="flex bg-white items-center gap-2 py-2 px-4 rounded-lg ">
+            <button className="flex bg-white items-center gap-2 py-2 px-4 rounded-lg outline-0">
               <svg
                 width="16"
                 height="16"
@@ -73,6 +88,7 @@ export const SwiperM = ({ trend }: { trend: Movie }) => {
             className="min-w-5xl w-full  p-0 overflow-hidden"
             showCloseButton={false}
           >
+            <DialogTitle className="sr-only">{trend.title}</DialogTitle>
             <DialogHeader>
               <div className=" aspect-video">
                 <iframe
