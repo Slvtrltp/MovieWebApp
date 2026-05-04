@@ -20,6 +20,7 @@ export default function Home() {
 
   const [page, setPage] = useState(1);
   const { id } = useParams();
+  const [totalResults, setTotalResults] = useState<number>(0);
 
   const toggleGenre = (genreId: number) => {
     setSelectedGenres(
@@ -28,18 +29,31 @@ export default function Home() {
           ? prev.filter((id) => id !== genreId) // Байвал хасна
           : [...prev, genreId], // Байхгүй бол нэмнэ
     );
-    setPage(1); // Төрөл солигдоход хуудсыг 1 болгоно
+    setPage(1);
   };
+  useEffect(() => {
+    if (id) {
+      const genreId = Number(id);
+
+      // Өмнөх бүх сонголтыг арилгаж, зөвхөн одоогийн ID-г оноох
+      setSelectedGenres([genreId]);
+
+      setPage(1);
+    }
+  }, [id]);
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=d67d8bebd0f4ff345f6505c99e9d0289`,
+      )
+      .then((res) => setGenres(res.data.genres));
+  }, []);
+
+  // Navigation-аас шилжих үед: Өмнөх сонголтуудыг цэвэрлэж зөвхөн нэгийг идэвхжүүлнэ
 
   useEffect(() => {
-    fetch(
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=d67d8bebd0f4ff345f6505c99e9d0289",
-    )
-      .then((res) => res.json())
-      .then((data) => setGenres(data.genres));
-  }, []);
-  useEffect(() => {
     const fetchMoviesByGenres = async () => {
+      // Хэрэв ямар ч төрөл сонгоогүй бол хоосон массив буцаахгүй байхын тулд
       const genreString = selectedGenres.join(",");
 
       try {
@@ -54,46 +68,52 @@ export default function Home() {
           },
         );
         setMovies(res.data.results);
+        setTotalResults(res.data.total_results);
       } catch (err) {
-        console.error(err);
+        console.error("Дата татахад алдаа гарлаа:", err);
       }
     };
 
     fetchMoviesByGenres();
   }, [selectedGenres, page]);
-
   return (
     <div>
       <Navigation />
-      <div className="px-72 space-y-8 mt-15 ">
-        <h1 className="text-[30px] font-semibold">Search filter</h1>
+      <div className="px-72 mt-15 ">
         <div className="flex">
-          <div className="flex flex-wrap gap-4 w-[350px] h-[350px]">
-            {genres.map((genre) => {
-              const isActive = selectedGenres.includes(genre.id); // Сонгогдсон эсэхийг шалгах
-              return (
-                <button
-                  onClick={() => toggleGenre(genre.id)}
-                  key={genre.id}
-                  className={`border cursor-pointer duration-300  text-xs font-semibold py-0.5 pl-2.5 pr-2 border-[#E4E4E7] rounded-full flex items-center gap-1  ${
-                    isActive
-                      ? "bg-black text-white border-primary h-6" // bg-black-ийн оронд primary ашиглах
-                      : "border-border text-foreground hover:bg-accent h-6"
-                  }`}
-                >
-                  {genre.name}
-
-                  {isActive && <span>✕</span>}
-                  {/* Хасах тэмдэг харуулж болно */}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="grid grid-cols-4 grid-rows-2 gap-10">
+          <p className="text-[20px] font-semibold">{totalResults} titles in</p>
+        </div>
+        <div className="flex gap-6">
+          <div className="grid grid-cols-4 grid-rows-2 gap-10 pr-3 pt-23">
             {movies.slice(0, 12).map((movie) => (
               <Card key={movie.id} upcom={movie} size="w-[310px]" />
             ))}
+          </div>
+          <div className="border-l-1 border border-[#E4E4E7] "></div>
+          <div>
+            <h1 className="text-[30px] font-semibold">Search by genre</h1>
+            <p className="pb-5">See lists of movies by genre</p>
+            <div className="flex flex-wrap gap-4 w-[350px] h-[200px]">
+              {genres.map((genre) => {
+                const isActive = selectedGenres.includes(genre.id); // Сонгогдсон эсэхийг шалгах
+                return (
+                  <button
+                    onClick={() => toggleGenre(genre.id)}
+                    key={genre.id}
+                    className={`h-6 border border-[#E4E4E7] rounded-full flex justify-center items-center cursor-pointer duration-300 text-xs font-semibold py-0.5 pl-2.5 pr-2 gap-1 ${
+                      isActive
+                        ? "bg-black text-white border-primary" // bg-black-ийн оронд primary ашиглах
+                        : "border-border text-foreground hover:bg-accent"
+                    }`}
+                  >
+                    {genre.name}
+
+                    {isActive && <span>✕</span>}
+                    {/* Хасах тэмдэг харуулж болно */}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
         <PaginationDemo page={page} setPage={setPage} />

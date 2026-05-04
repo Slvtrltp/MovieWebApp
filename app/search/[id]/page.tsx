@@ -16,7 +16,7 @@ export default function Page() {
   const params = useParams();
   const searchId = decodeURIComponent(params.id as string);
   const [page, setPage] = useState(1);
-
+  const [totalResults, setTotalResults] = useState<number>(0);
   useEffect(() => {
     axios
       .get(
@@ -31,7 +31,10 @@ export default function Page() {
         .get(
           `https://api.themoviedb.org/3/search/movie?query=${searchId}&api_key=d67d8bebd0f4ff345f6505c99e9d0289&page=${page}`,
         )
-        .then((res) => setMovieSearch(res.data.results));
+        .then((res) => {
+          setMovieSearch(res.data.results);
+          setTotalResults(res.data.total_results);
+        });
     }
   }, [searchId, page]);
 
@@ -39,14 +42,19 @@ export default function Page() {
     <div>
       <Navigation />
       <div className="px-72 space-y-8 mt-15 ">
-        <h1 className="text-[30px] font-semibold">Search filter</h1>
-        <div className="flex">
-          <div className="flex flex-wrap gap-4 w-[350px] h-[350px]">
+        <h1 className="text-[30px] font-semibold">Search results</h1>
+        <div className="flex justify-end">
+          <p className="text-[20px] font-semibold">
+            {totalResults} results for "{searchId}"
+          </p>
+        </div>
+        <div className="flex gap-5">
+          <div className="flex flex-wrap gap-4 w-[350px] h-[200px]">
             {genres.map((genre) => (
               <Link
                 href={`/genre/${genre.id}`}
                 key={genre.id}
-                className="border cursor-pointer duration-300   text-xs font-semibold py-0.5 pl-2.5 pr-2 border-[#E4E4E7] rounded-full flex items-center gap-2  hover:bg-[#E4E4E7]"
+                className="border cursor-pointer duration-300 h-6  text-xs font-semibold py-0.5 pl-2.5 pr-2 border-[#E4E4E7] rounded-full flex items-center gap-2  hover:bg-[#E4E4E7]"
               >
                 {genre.name}
                 <svg
@@ -66,7 +74,7 @@ export default function Page() {
               </Link>
             ))}
           </div>
-
+          <div className="border-l-1 border border-[#E4E4E7] "></div>
           <div className="grid grid-cols-4 grid-rows-2 gap-10">
             {movieSearch.slice(0, 12).map((movie) => (
               <Card key={movie.id} upcom={movie} size="w-[310px]" />

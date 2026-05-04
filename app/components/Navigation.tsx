@@ -177,10 +177,12 @@ export const Navigation = () => {
                 ))}
 
                 <Link href={`/search/${encodeURIComponent(search)}`}>
-                  <p className="border-t border-[#E4E4E7] pt-2 bg-gray-50 hover:bg-gray-100 cursor-pointer group relative inline-block transition-all duration-300">
-                    See all results for <span>"{search}"</span>
-                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
-                  </p>
+                  <div className="border-t border-[#E4E4E7] pt-2">
+                    <p className="cursor-pointer group relative inline-block transition-all duration-300">
+                      See all results for <span>"{search}"</span>
+                      <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#E4E4E7] transition-all duration-300 group-hover:w-full"></span>
+                    </p>
+                  </div>
                 </Link>
               </div>
             )}
