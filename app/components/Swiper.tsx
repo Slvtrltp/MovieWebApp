@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import axios from "axios";
 import { useSwiper } from "swiper/react";
+import Link from "next/link";
 
 export const SwiperM = ({ trend }: { trend: Movie }) => {
   const [trailer, setTrailer] = useState<VideoResult[]>([]);
@@ -44,15 +45,23 @@ export const SwiperM = ({ trend }: { trend: Movie }) => {
 
   return (
     <div className="relative">
-      <img
-        className="w-full h-200 absolute bg-center object-cover z-0 "
-        src={`https://image.tmdb.org/t/p/original${trend.backdrop_path}`}
-        alt=""
-      />
+      <Link href={`/details/${trend.id}`}>
+        <img
+          className="w-full h-200 absolute bg-center object-cover z-0 "
+          src={`https://image.tmdb.org/t/p/original${trend.backdrop_path}`}
+          alt=""
+        />
+      </Link>
+
       <div className="absolute bottom-0 left-40  z-2 gap-4 top-60">
         <div>
           <p className="text-[18px] text-white">Now Playing:</p>
-          <h1 className="text-[36px] font-bold text-white">{trend.title}</h1>
+          <Link
+            href={`/details/${trend.id}`}
+            className="text-[36px] font-bold text-white"
+          >
+            {trend.title}
+          </Link>
           <Star
             star={trend?.vote_average}
             font="text-[18px]"

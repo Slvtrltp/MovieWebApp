@@ -13,7 +13,7 @@ import { MovieSection } from "./components/MovieSection";
 export default function Home() {
   return (
     <div className="flex flex-col w-full">
-      <Navigation url="details/" />
+      <Navigation />
       <Upcoming />
       <MovieSection />
       <Footer />

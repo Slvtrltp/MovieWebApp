@@ -8,7 +8,6 @@ import { useParams } from "next/navigation";
 
 import React, { useEffect, useState } from "react";
 import { Card } from "@/app/components/Card";
-import { Cardinfo } from "@/app/components/Cardinfo";
 
 export default function Home() {
   const [movie, setMovie] = useState<MovieDetails | null>(null);
@@ -46,7 +45,7 @@ export default function Home() {
   return (
     <div className="w-full">
       <div>
-        <Navigation url="" />
+        <Navigation />
       </div>
 
       <div className=" flex justify-between px-70 space-y-6 mt-13">
@@ -78,7 +77,16 @@ export default function Home() {
           alt="movie"
           className=" h-[550px]"
         />
-        <div className="w-[1000px] h-[550px] bg-gray-100"></div>
+        <div className="w-[1000px] h-[550px] bg-gray-100">
+          <iframe
+            src={"https://www.vidking.net/embed/movie/" + id}
+            width="100%"
+            height="550"
+            allowFullScreen
+          >
+            {" "}
+          </iframe>
+        </div>
       </div>
       <div className="space-y-5">
         <div className="flex gap-3 px-70 mt-8">
@@ -122,7 +130,7 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-5 w-[2100px] w-fit px-70 mt-8 gap-11">
         {more.slice(0, 5).map((more) => (
-          <Cardinfo upcom={more} key={more.id} />
+          <Card upcom={more} key={more.id} size="w-full" />
         ))}
       </div>
       <div>

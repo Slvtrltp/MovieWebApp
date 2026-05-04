@@ -1,14 +1,17 @@
+"use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Genres, Movie, MovieDetails, MovieSearch } from "../types";
 import { Star } from "./Star";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
-export const Navigation = ({ url }: { url: string }) => {
+export const Navigation = () => {
   const [genres, setGenres] = useState<Genres[]>([]);
   const [isVisible, setIsVisible] = useState(false);
   const [movieSearch, setMovieSearch] = useState<MovieSearch[]>([]);
   const [search, setSearch] = useState<string>("");
+  const router = useRouter();
 
   useEffect(() => {
     fetch(
@@ -56,6 +59,11 @@ export const Navigation = ({ url }: { url: string }) => {
                     setIsVisible(false);
                   }
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && search.trim() !== "") {
+                    router.push(`/search/${encodeURIComponent(search)}`);
+                  }
+                }}
                 className={`w-83.25 outline-0 `}
                 placeholder="search.."
               ></input>
@@ -72,35 +80,45 @@ export const Navigation = ({ url }: { url: string }) => {
               </p>
               <hr className="border border-[#E4E4E7] my-4" />
               <div className="flex flex-wrap gap-4">
-                {genres.map((genre) => (
-                  <button
-                    key={genre.id}
-                    className="border cursor-pointer duration-300  text-xs font-semibold py-0.5 pl-2.5 pr-2 border-[#E4E4E7] rounded-full flex items-center gap-2  hover:bg-[#E4E4E7]"
-                  >
-                    {genre.name}
-                    <svg
-                      width="5"
-                      height="9"
-                      viewBox="0 0 5 9"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+                {genres.map((genre) => {
+                  return (
+                    <Link
+                      href={`/genre/${genre.id}`}
+                      key={genre.id}
+                      className={`border cursor-pointer duration-300   text-xs font-semibold py-0.5 pl-2.5 pr-2 border-[#E4E4E7] rounded-full flex items-center gap-2  hover:bg-[#E4E4E7]`}
                     >
-                      <path
-                        d="M0.5 8.5L4.5 4.5L0.5 0.5"
-                        stroke="#09090B"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                ))}
+                      {genre.name}
+                      <svg
+                        width="5"
+                        height="9"
+                        viewBox="0 0 5 9"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0.5 8.5L4.5 4.5L0.5 0.5"
+                          stroke="#09090B"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
             {movieSearch.length === 0 && search !== "" ? (
               <div
-                className={`w-[577px] flex justify-center items-center bg-white border border-[#E4E4E7] rounded-lg min-h-[88px] z-2 absolute top-13 p-6 text-[14px] ${search !== "" && movieSearch.length === 0 ? "visible" : "invisible"} ${search.length > 0 ? "visible" : "invisible"}`}
+                className={`w-[577px] bg-white border border-[#E4E4E7] rounded-lg min-h-[88px] z-2 absolute top-13 p-6 text-[14px] ${search !== "" && movieSearch.length === 0 ? "visible" : "invisible"} ${search.length > 0 ? "visible" : "invisible"}`}
               >
-                No results found.
+                <div className="flex justify-center pb-7">
+                  <p>No results found.</p>
+                </div>
+                <Link href={`/search/${encodeURIComponent(search)}`}>
+                  <p className="border-t border-[#E4E4E7] pt-4 bg-gray-50 hover:bg-gray-100 cursor-pointer">
+                    See all results for <span>"{search}"</span>
+                  </p>
+                </Link>
               </div>
             ) : (
               <div
@@ -108,7 +126,7 @@ export const Navigation = ({ url }: { url: string }) => {
               >
                 {movieSearch.slice(0, 5).map((movie) => (
                   <Link
-                    href={`${url}/${movie.id}`}
+                    href={`/details/${movie.id}`}
                     key={movie.id}
                     className="p-2 space-y-2 flex gap-4 "
                   >
@@ -157,6 +175,13 @@ export const Navigation = ({ url }: { url: string }) => {
                     </div>
                   </Link>
                 ))}
+
+                <Link href={`/search/${encodeURIComponent(search)}`}>
+                  <p className="border-t border-[#E4E4E7] pt-2 bg-gray-50 hover:bg-gray-100 cursor-pointer group relative inline-block transition-all duration-300">
+                    See all results for <span>"{search}"</span>
+                    <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+                  </p>
+                </Link>
               </div>
             )}
           </div>

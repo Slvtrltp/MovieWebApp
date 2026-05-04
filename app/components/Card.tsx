@@ -3,15 +3,20 @@ import { Star } from "./Star";
 import { Movie } from "../types";
 import Link from "next/link";
 
-export const Card = ({ upcom }: { upcom: Movie }) => {
+type Props = {
+  upcom: Movie;
+  size: string;
+};
+
+export const Card = ({ upcom, size }: Props) => {
   return (
     <Link
-      href={`details/${upcom.id}`}
+      href={`/details/${upcom.id}`}
       className="w-[300.73px] h-[480px] bg-[#f4f4f5] rounded-xl overflow-hidden shadow-lg"
     >
       <div>
         <img
-          className="w-full h-[380px]"
+          className={`${size} h-[380px]`}
           src={`https://image.tmdb.org/t/p/w500${upcom.poster_path}`}
           alt=""
         />
