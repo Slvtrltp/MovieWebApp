@@ -16,7 +16,7 @@ export const Card = ({ upcom, size }: Props) => {
     >
       <div>
         <img
-          className={`${size} h-[380px]`}
+          className={`${size} h-[380px] object-fit rounded-xl`}
           src={`https://image.tmdb.org/t/p/w500${upcom.poster_path}`}
           alt=""
         />

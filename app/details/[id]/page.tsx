@@ -127,7 +127,13 @@ export default function Home() {
       </div>
       <div className="flex justify-between  px-70 items-center pt-8 ">
         <div className=" text-[24px] font-semibold">More like this</div>
-        <p className="cursor-pointer">See more</p>
+        <Link
+          href={`/morelike/${movie?.id}`}
+          className="group relative inline-block transition-all duration-300"
+        >
+          See more
+          <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+        </Link>
       </div>
       <div className="grid grid-cols-5 w-[2100px] w-fit px-70 mt-8 gap-11">
         {more.slice(0, 5).map((more) => (

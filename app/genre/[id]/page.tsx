@@ -76,17 +76,25 @@ export default function Home() {
 
     fetchMoviesByGenres();
   }, [selectedGenres, page]);
+
+  const selectedGenreNames = genres
+    .filter((genre) => selectedGenres.includes(genre.id))
+    .map((genre) => genre.name)
+    .join(", ");
+
   return (
     <div>
       <Navigation />
       <div className="px-72 mt-15 ">
         <div className="flex">
-          <p className="text-[20px] font-semibold">{totalResults} titles in</p>
+          <p className="text-[20px] font-semibold">
+            {totalResults} titles in {selectedGenreNames}
+          </p>
         </div>
-        <div className="flex gap-6">
+        <div className="flex gap-7">
           <div className="grid grid-cols-4 grid-rows-2 gap-10 pr-3 pt-23">
             {movies.slice(0, 12).map((movie) => (
-              <Card key={movie.id} upcom={movie} size="w-[310px]" />
+              <Card key={movie.id} upcom={movie} size="w-[280px]" />
             ))}
           </div>
           <div className="border-l-1 border border-[#E4E4E7] "></div>

@@ -77,7 +77,7 @@ export default function Page() {
           <div className="border-l-1 border border-[#E4E4E7] "></div>
           <div className="grid grid-cols-4 grid-rows-2 gap-10">
             {movieSearch.slice(0, 12).map((movie) => (
-              <Card key={movie.id} upcom={movie} size="w-[310px]" />
+              <Card key={movie.id} upcom={movie} size="w-[280px]" />
             ))}
           </div>
         </div>
