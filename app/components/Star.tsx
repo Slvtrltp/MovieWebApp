@@ -29,7 +29,9 @@ export const Star = ({ font, color, tfont, size, tcolor, star }: StarProps) => {
         />
       </svg>
       <p className="text-center">
-        <span className={`${font} ${color} `}>{star?.toFixed(1)}</span>
+        <span className={`${font} ${color} dark:text-white`}>
+          {star?.toFixed(1)}
+        </span>
         <span className={`${tfont} ${tcolor}`}>/10</span>
       </p>
     </div>

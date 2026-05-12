@@ -27,7 +27,7 @@ export const Upcoming = () => {
       });
   }, []);
   return (
-    <div className="pt-6 ">
+    <div>
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}

@@ -2,7 +2,7 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <div className="w-full h-[300px] mt-28 bg-[#4338CA] flex items-center gap-30 justify-around ">
+    <div className="w-full h-[300px] mt-28 bg-[#4338CA] flex items-center gap-30 justify-around  dark:bg-black">
       <div className="container flex items-center">
         <div className=" h-[200px] w-[247px] space-y-4 c">
           <div className="flex gap-2 items-center">
