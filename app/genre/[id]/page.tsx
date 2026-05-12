@@ -26,8 +26,8 @@ export default function Home() {
     setSelectedGenres(
       (prev) =>
         prev.includes(genreId)
-          ? prev.filter((id) => id !== genreId) // Байвал хасна
-          : [...prev, genreId], // Байхгүй бол нэмнэ
+          ? prev.filter((id) => id !== genreId) 
+          : [...prev, genreId],
     );
     setPage(1);
   };
@@ -35,7 +35,6 @@ export default function Home() {
     if (id) {
       const genreId = Number(id);
 
-      // Өмнөх бүх сонголтыг арилгаж, зөвхөн одоогийн ID-г оноох
       setSelectedGenres([genreId]);
 
       setPage(1);
@@ -85,46 +84,48 @@ export default function Home() {
   return (
     <div>
       <Navigation />
-      <div className="px-72 mt-15 ">
-        <div className="flex">
-          <p className="text-[20px] font-semibold">
-            {totalResults} titles in {selectedGenreNames}
-          </p>
-        </div>
-        <div className="flex gap-7">
-          <div className="grid grid-cols-4 grid-rows-2 gap-10 pr-3 pt-23">
-            {movies.slice(0, 12).map((movie) => (
-              <Card key={movie.id} upcom={movie} size="w-[280px]" />
-            ))}
+      <div className="flex justify-center">
+        <div className="container mt-15 ">
+          <div className="flex">
+            <p className="text-[20px] font-semibold">
+              {totalResults} titles in {selectedGenreNames}
+            </p>
           </div>
-          <div className="border-l-1 border border-[#E4E4E7] "></div>
-          <div>
-            <h1 className="text-[30px] font-semibold">Search by genre</h1>
-            <p className="pb-5">See lists of movies by genre</p>
-            <div className="flex flex-wrap gap-4 w-[350px] h-[200px]">
-              {genres.map((genre) => {
-                const isActive = selectedGenres.includes(genre.id); // Сонгогдсон эсэхийг шалгах
-                return (
-                  <button
-                    onClick={() => toggleGenre(genre.id)}
-                    key={genre.id}
-                    className={`h-6 border border-[#E4E4E7] rounded-full flex justify-center items-center cursor-pointer duration-300 text-xs font-semibold py-0.5 pl-2.5 pr-2 gap-1 ${
-                      isActive
-                        ? "bg-black text-white border-primary" // bg-black-ийн оронд primary ашиглах
-                        : "border-border text-foreground hover:bg-accent"
-                    }`}
-                  >
-                    {genre.name}
+          <div className="flex gap-7">
+            <div className="grid grid-cols-4 grid-rows-2 gap-10 pr-3 pt-23">
+              {movies.slice(0, 12).map((movie) => (
+                <Card key={movie.id} upcom={movie} size="w-64" />
+              ))}
+            </div>
+            <div className="border-l-1 border border-[#E4E4E7] "></div>
+            <div>
+              <h1 className="text-[30px] font-semibold">Search by genre</h1>
+              <p className="pb-5">See lists of movies by genre</p>
+              <div className="flex flex-wrap gap-4 w-[350px] h-[200px]">
+                {genres.map((genre) => {
+                  const isActive = selectedGenres.includes(genre.id); // Сонгогдсон эсэхийг шалгах
+                  return (
+                    <button
+                      onClick={() => toggleGenre(genre.id)}
+                      key={genre.id}
+                      className={`h-6 border border-[#E4E4E7] rounded-full flex justify-center items-center cursor-pointer duration-300 text-xs font-semibold py-0.5 pl-2.5 pr-2 gap-1 ${
+                        isActive
+                          ? "bg-black text-white border-primary" // bg-black-ийн оронд primary ашиглах
+                          : "border-border text-foreground hover:bg-accent"
+                      }`}
+                    >
+                      {genre.name}
 
-                    {isActive && <span>✕</span>}
-                    {/* Хасах тэмдэг харуулж болно */}
-                  </button>
-                );
-              })}
+                      {isActive && <span>✕</span>}
+                      {/* Хасах тэмдэг харуулж болно */}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
+          <PaginationDemo page={page} setPage={setPage} />
         </div>
-        <PaginationDemo page={page} setPage={setPage} />
       </div>
       <Footer />
     </div>

@@ -12,7 +12,7 @@ export const Card = ({ upcom, size }: Props) => {
   return (
     <Link
       href={`/details/${upcom.id}`}
-      className="w-[300.73px] h-[480px] bg-[#f4f4f5] rounded-xl overflow-hidden shadow-lg"
+      className="w-full h-[480px] rounded-xl overflow-hidden shadow-lg dark:shadow-lg dark:shadow-white"
     >
       <div>
         <img

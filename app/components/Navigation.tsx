@@ -5,6 +5,7 @@ import { Genres, Movie, MovieDetails, MovieSearch } from "../types";
 import { Star } from "./Star";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 
 export const Navigation = () => {
   const [genres, setGenres] = useState<Genres[]>([]);
@@ -12,6 +13,7 @@ export const Navigation = () => {
   const [movieSearch, setMovieSearch] = useState<MovieSearch[]>([]);
   const [search, setSearch] = useState<string>("");
   const router = useRouter();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     fetch(
@@ -31,8 +33,8 @@ export const Navigation = () => {
   }, [search]);
 
   return (
-    <div className="px-50 py-[11.5px] ">
-      <div className="  mx-auto ">
+    <div className="flex flex-col items-center py-[11.5px] ">
+      <div className="  mx-auto container">
         <div className="flex justify-between  ">
           <Link href={"/"} className="flex gap-2 items-center">
             <img className="w-5" src="/logo.svg" alt="logo" />
@@ -116,7 +118,7 @@ export const Navigation = () => {
                 </div>
                 <Link href={`/search/${encodeURIComponent(search)}`}>
                   <p className="border-t border-[#E4E4E7] pt-4 bg-gray-50 hover:bg-gray-100 cursor-pointer">
-                    See all results for <span>"{search}"</span>
+                    See all results for <span>&quot;{search}&quot;</span>
                   </p>
                 </Link>
               </div>
@@ -179,7 +181,7 @@ export const Navigation = () => {
                 <Link href={`/search/${encodeURIComponent(search)}`}>
                   <div className="border-t border-[#E4E4E7] pt-2">
                     <p className="cursor-pointer group relative inline-block transition-all duration-300">
-                      See all results for <span>"{search}"</span>
+                      See all results for <span>&quot;{search}&quot;</span>
                       <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#E4E4E7] transition-all duration-300 group-hover:w-full"></span>
                     </p>
                   </div>
@@ -187,34 +189,53 @@ export const Navigation = () => {
               </div>
             )}
           </div>
-          <div>
-            <svg
-              width="40"
-              height="40"
-              viewBox="0 0 40 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g filter="url(#filter0_d_1249_6382)">
+          <button
+            className="dark:bg-black"
+            onClick={() => {
+              setTheme(theme === "light" ? "dark" : "light");
+            }}
+          >
+            {theme === "dark" ? (
+              <svg
+                className="border border-white bg-black rounded-[10px] w-10 h-10 flex justify-center items-center"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
-                  d="M2 11C2 5.47715 6.47715 1 12 1H28C33.5228 1 38 5.47715 38 11V27C38 32.5228 33.5228 37 28 37H12C6.47715 37 2 32.5228 2 27V11Z"
-                  fill="white"
-                  shapeRendering="crispEdges"
-                />
-                <path
-                  d="M12 1.5H28C33.2467 1.5 37.5 5.7533 37.5 11V27C37.5 32.2467 33.2467 36.5 28 36.5H12C6.7533 36.5 2.5 32.2467 2.5 27V11C2.5 5.7533 6.7533 1.5 12 1.5Z"
-                  stroke="#E4E4E7"
-                  shapeRendering="crispEdges"
-                />
-                <path
-                  d="M20 13C19.2044 13.7956 18.7574 14.8748 18.7574 16C18.7574 17.1252 19.2044 18.2044 20 19C20.7957 19.7956 21.8748 20.2426 23 20.2426C24.1252 20.2426 25.2044 19.7956 26 19C26 20.1867 25.6481 21.3467 24.9888 22.3334C24.3295 23.3201 23.3925 24.0892 22.2961 24.5433C21.1997 24.9974 19.9933 25.1162 18.8295 24.8847C17.6656 24.6532 16.5965 24.0818 15.7574 23.2426C14.9182 22.4035 14.3468 21.3344 14.1153 20.1705C13.8838 19.0067 14.0026 17.8003 14.4567 16.7039C14.9109 15.6075 15.6799 14.6705 16.6666 14.0112C17.6533 13.3519 18.8133 13 20 13Z"
-                  stroke="#18181B"
+                  d="M8 2C7.20435 2.79565 6.75736 3.87478 6.75736 5C6.75736 6.12522 7.20435 7.20435 8 8C8.79565 8.79565 9.87478 9.24264 11 9.24264C12.1252 9.24264 13.2044 8.79565 14 8C14 9.18669 13.6481 10.3467 12.9888 11.3334C12.3295 12.3201 11.3925 13.0892 10.2961 13.5433C9.19975 13.9974 7.99335 14.1162 6.82946 13.8847C5.66558 13.6532 4.59648 13.0818 3.75736 12.2426C2.91825 11.4035 2.3468 10.3344 2.11529 9.17054C1.88378 8.00666 2.0026 6.80026 2.45673 5.7039C2.91085 4.60754 3.67989 3.67047 4.66658 3.01118C5.65328 2.35189 6.81331 2 8 2Z"
+                  stroke="#ffffff"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-              </g>
-            </svg>
-          </div>
+              </svg>
+            ) : (
+              <svg
+                className="border border-black rounded-[10px] w-10 h-10 flex justify-center items-center"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clipPath="url(#clip0_2881_2258)">
+                  <path
+                    d="M8.00004 1.3335V2.66683M8.00004 13.3335V14.6668M3.28671 3.28683L4.22671 4.22683M11.7734 11.7735L12.7134 12.7135M1.33337 8.00016H2.66671M13.3334 8.00016H14.6667M4.22671 11.7735L3.28671 12.7135M12.7134 3.28683L11.7734 4.22683M10.6667 8.00016C10.6667 9.47292 9.4728 10.6668 8.00004 10.6668C6.52728 10.6668 5.33337 9.47292 5.33337 8.00016C5.33337 6.5274 6.52728 5.3335 8.00004 5.3335C9.4728 5.3335 10.6667 6.5274 10.6667 8.00016Z"
+                    stroke="#18181B"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_2881_2258">
+                    <rect width="16" height="16" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            )}
+          </button>
         </div>
       </div>
     </div>

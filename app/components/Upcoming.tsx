@@ -27,15 +27,14 @@ export const Upcoming = () => {
       });
   }, []);
   return (
-    <div className="pt-6">
+    <div className="pt-6 ">
       <Swiper
-        // Модулиудаа идэвхжүүлнэ
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={0} // Слайд хоорондын зай
-        slidesPerView={1} // Нэг удаа харагдах слайдны тоо
-        navigation={true} // Сумнууд харуулах
-        pagination={{ clickable: true }} // Доорх цэгүүд
-        autoplay={{ delay: 5000 }} // Автоматаар гүйлгэх
+        spaceBetween={0}
+        slidesPerView={1}
+        navigation={true}
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 5000 }}
         className="h-[800px] w-full object-cover"
       >
         {upcoming.slice(0, 5).map((trend) => (
@@ -45,7 +44,6 @@ export const Upcoming = () => {
         ))}
       </Swiper>
 
-      {/* Tailwind ашиглан Swiper-ийн сумны өнгийг өөрчлөх "Trick" */}
       <style jsx global>{`
         .swiper-button-next {
           color: #3b82f6 !important; /* Tailwind blue-500 */

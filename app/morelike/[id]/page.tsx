@@ -31,17 +31,20 @@ export default function Page() {
   return (
     <div>
       <Navigation />
-      <div className="text-[30px] font-semibold px-80 pt-20">
-        More like this
-      </div>
-      <div className="grid grid-cols-5 w-[2100px] w-fit px-70 mt-8 gap-11">
-        {" "}
-        {more.slice(0, 10).map((movie) => (
-          <Card upcom={movie} key={movie.id} size="w-full" />
-        ))}
-      </div>
-      <div className="px-80">
-        <PaginationDemo page={page} setPage={setPage} />
+      <div className="flex justify-center">
+        <div className="container">
+          {" "}
+          <div className="text-[30px] font-semibold  pt-20">More like this</div>
+          <div className="grid grid-cols-5 w-[2100px] w-fit gap-11  mt-8 ">
+            {" "}
+            {more.slice(0, 10).map((movie) => (
+              <Card upcom={movie} key={movie.id} size="w-70" />
+            ))}
+          </div>
+          <div className="">
+            <PaginationDemo page={page} setPage={setPage} />
+          </div>
+        </div>
       </div>
       <Footer />
     </div>

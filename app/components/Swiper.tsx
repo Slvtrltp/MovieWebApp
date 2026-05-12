@@ -44,7 +44,7 @@ export const SwiperM = ({ trend }: { trend: Movie }) => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative ">
       <Link href={`/details/${trend.id}`}>
         <img
           className="w-full h-200 absolute bg-center object-cover z-0 "
@@ -53,7 +53,7 @@ export const SwiperM = ({ trend }: { trend: Movie }) => {
         />
       </Link>
 
-      <div className="absolute bottom-0 left-40  z-2 gap-4 top-60">
+      <div className="absolute bottom-0 left-83  z-2 gap-4 top-60 ">
         <div>
           <p className="text-[18px] text-white">Now Playing:</p>
           <Link
@@ -75,7 +75,7 @@ export const SwiperM = ({ trend }: { trend: Movie }) => {
 
         <Dialog open={isActive} onOpenChange={handlePlayer}>
           <DialogTrigger asChild>
-            <button className="flex bg-white items-center gap-2 py-2 px-4 rounded-lg outline-0">
+            <button className="flex bg-white items-center gap-2 py-2 px-4 rounded-lg outline-0 text-black">
               <svg
                 width="16"
                 height="16"

@@ -59,19 +59,24 @@ export default function Home() {
     <div className="flex flex-col w-full">
       <Navigation />
 
-      <div className="w-full h-full flex items-center flex-col">
-        <div className="flex justify-start w-full px-80 h-60 items-end">
-          <div className="flex justify-start w-full h-60 items-center  text-[24px] font-semibold">
-            {titleChange()}
+      <div className="flex justify-center">
+        <div className="container">
+          {" "}
+          <div className="w-full h-full flex items-center flex-col">
+            <div className="flex justify-start w-full h-60 items-end">
+              <div className="flex justify-start w-full h-60 items-center  text-[24px] font-semibold">
+                {titleChange()}
+              </div>
+            </div>
+            <div className="grid grid-cols-5 grid-rows-2 gap-10">
+              {movies.slice(0, 10).map((movie) => (
+                <Card key={movie.id} upcom={movie} size="w-70" />
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="grid grid-cols-5 grid-rows-2 gap-10">
-          {movies.slice(0, 10).map((movie) => (
-            <Card key={movie.id} upcom={movie} size="w-full" />
-          ))}
+          <PaginationDemo page={page} setPage={setPage} />
         </div>
       </div>
-      <PaginationDemo page={page} setPage={setPage} padding="px-66" />
       <Footer />
     </div>
   );

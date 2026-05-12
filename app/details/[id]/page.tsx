@@ -44,101 +44,108 @@ export default function Home() {
   };
 
   return (
-    <div className="w-full">
+    <div>
       <div>
         <Navigation />
       </div>
 
-      <div className=" flex justify-between px-70 space-y-6 mt-13">
-        <div>
-          <h1 className="text-[36px] font-semibold">{movie?.original_title}</h1>
-          <p>
-            {movie?.release_date}, {formatRuntime(movie?.runtime)}
-          </p>
-        </div>
-        <div className="">
-          <p className="pl-2 text-[12px]">Rating</p>
-          <Star
-            star={movie?.vote_average}
-            size="28px"
-            font="text-[18px]"
-            color="text-black"
-            tfont="text-[16px]"
-            tcolor="text-[#71717A]"
-            weight="font-semibold"
-          />
-          <li className="pl-2 text-[#71717A] text-[12px]">
-            {movie?.vote_count}k
-          </li>
-        </div>
-      </div>
-      <div className="flex gap-10 px-70">
-        <img
-          src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
-          alt="movie"
-          className=" h-[550px]"
-        />
-        <div className="w-[1000px] h-[550px] bg-gray-100">
-          <iframe
-            src={"https://www.vidking.net/embed/movie/" + id}
-            width="100%"
-            height="550"
-            allowFullScreen
-          >
-            {" "}
-          </iframe>
-        </div>
-      </div>
-      <div className="space-y-5">
-        <div className="flex gap-3 px-70 mt-8">
-          {genres.map((genre) => (
-            <div key={genre.id}>
-              <button className="border cursor-pointer duration-300  text-xs font-semibold py-0.5 pl-2.5 pr-2 border-[#E4E4E7] rounded-full flex items-center gap-2  hover:bg-[#E4E4E7]">
-                {genre.name}
-              </button>
+      <div className="flex justify-center">
+        <div className=" w-full container">
+          {" "}
+          <div className=" flex justify-between  space-y-6 mt-13">
+            <div>
+              <h1 className="text-[36px] font-semibold">
+                {movie?.original_title}
+              </h1>
+              <p>
+                {movie?.release_date}, {formatRuntime(movie?.runtime)}
+              </p>
             </div>
-          ))}
-        </div>
+            <div className="">
+              <p className="pl-2 text-[12px]">Rating</p>
+              <Star
+                star={movie?.vote_average}
+                size="28px"
+                font="text-[18px]"
+                color="text-black"
+                tfont="text-[16px]"
+                tcolor="text-[#71717A]"
+                weight="font-semibold"
+              />
+              <li className="pl-2 text-[#71717A] text-[12px]">
+                {movie?.vote_count}k
+              </li>
+            </div>
+          </div>
+          <div className="flex justify-between ">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+              alt="movie"
+              className=" h-[650px]"
+            />
+            <div className="w-[1000px] h-[550px] bg-gray-100">
+              <iframe
+                src={"https://www.vidking.net/embed/movie/" + id}
+                width="100%"
+                height="650"
+                allowFullScreen
+              >
+                {" "}
+              </iframe>
+            </div>
+          </div>
+          <div className="space-y-5">
+            <div className="flex gap-3  mt-8">
+              {genres.map((genre) => (
+                <div key={genre.id}>
+                  <button className="border cursor-pointer duration-300  text-xs font-semibold py-0.5 pl-2.5 pr-2 border-[#E4E4E7] rounded-full flex items-center gap-2  hover:bg-[#E4E4E7]">
+                    {genre.name}
+                  </button>
+                </div>
+              ))}
+            </div>
 
-        <p className="px-70">{movie?.overview}</p>
-        <div className="px-70 space-y-5">
-          <div className="space-y-1">
-            <div className="flex gap-13 ">
-              <h2 className="text-[16px] font-bold">Director</h2>
-              <p></p>
+            <p className="">{movie?.overview}</p>
+            <div className="space-y-5">
+              <div className="space-y-1">
+                <div className="flex gap-13 ">
+                  <h2 className="text-[16px] font-bold">Director</h2>
+                  <p></p>
+                </div>
+                <div className="border border-[#E4E4E7]"></div>
+              </div>
+              <div className="space-y-1">
+                <div className="flex gap-13 ">
+                  <h2 className="text-[16px] font-bold">Writers</h2>
+                  <p></p>
+                </div>
+                <div className="border border-[#E4E4E7]"></div>
+              </div>
+              <div className="space-y-1">
+                <div className="flex gap-13 ">
+                  <h2 className="text-[16px] font-bold">Stars</h2>
+                  <p></p>
+                </div>
+                <div className="border border-[#E4E4E7]"></div>
+              </div>
             </div>
-            <div className="border border-[#E4E4E7]"></div>
           </div>
-          <div className="space-y-1">
-            <div className="flex gap-13 ">
-              <h2 className="text-[16px] font-bold">Writers</h2>
-              <p></p>
-            </div>
-            <div className="border border-[#E4E4E7]"></div>
+          <div className="flex justify-between   items-center pt-8 ">
+            <div className=" text-[24px] font-semibold">More like this</div>
+            <Link
+              href={`/morelike/${movie?.id}`}
+              className="group relative inline-block transition-all duration-300"
+            >
+              See more
+              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+            </Link>
           </div>
-          <div className="space-y-1">
-            <div className="flex gap-13 ">
-              <h2 className="text-[16px] font-bold">Stars</h2>
-              <p></p>
-            </div>
-            <div className="border border-[#E4E4E7]"></div>
+          <div className="grid grid-cols-5 w-[2100px] w-fit  mt-8 gap-11">
+            {more.slice(0, 5).map((more) => (
+              <Card upcom={more} key={more.id} size="w-70" />
+            ))}
           </div>
         </div>
-      </div>
-      <div className="flex justify-between  px-70 items-center pt-8 ">
-        <div className=" text-[24px] font-semibold">More like this</div>
-        <Link
-          href={`/morelike/${movie?.id}`}
-          className="group relative inline-block transition-all duration-300"
-        >
-          See more
-          <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
-        </Link>
-      </div>
-      <div className="grid grid-cols-5 w-[2100px] w-fit px-70 mt-8 gap-11">
-        {more.slice(0, 5).map((more) => (
-          <Card upcom={more} key={more.id} size="w-full" />
-        ))}
       </div>
       <div>
         <Footer />

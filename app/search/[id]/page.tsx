@@ -41,47 +41,49 @@ export default function Page() {
   return (
     <div>
       <Navigation />
-      <div className="px-72 space-y-8 mt-15 ">
-        <h1 className="text-[30px] font-semibold">Search results</h1>
-        <div className="flex justify-end">
-          <p className="text-[20px] font-semibold">
-            {totalResults} results for "{searchId}"
-          </p>
-        </div>
-        <div className="flex gap-5">
-          <div className="flex flex-wrap gap-4 w-[350px] h-[200px]">
-            {genres.map((genre) => (
-              <Link
-                href={`/genre/${genre.id}`}
-                key={genre.id}
-                className="border cursor-pointer duration-300 h-6  text-xs font-semibold py-0.5 pl-2.5 pr-2 border-[#E4E4E7] rounded-full flex items-center gap-2  hover:bg-[#E4E4E7]"
-              >
-                {genre.name}
-                <svg
-                  width="5"
-                  height="9"
-                  viewBox="0 0 5 9"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+      <div className="flex justify-center">
+        <div className="container space-y-8 mt-15 ">
+          <h1 className="text-[30px] font-semibold">Search results</h1>
+          <div className="flex justify-end">
+            <p className="text-[20px] font-semibold">
+              {totalResults} results for "{searchId}"
+            </p>
+          </div>
+          <div className="flex gap-5">
+            <div className="flex flex-wrap gap-4 w-[350px] h-[200px]">
+              {genres.map((genre) => (
+                <Link
+                  href={`/genre/${genre.id}`}
+                  key={genre.id}
+                  className="border cursor-pointer duration-300 h-6  text-xs font-semibold py-0.5 pl-2.5 pr-2 border-[#E4E4E7] rounded-full flex items-center gap-2  hover:bg-[#E4E4E7]"
                 >
-                  <path
-                    d="M0.5 8.5L4.5 4.5L0.5 0.5"
-                    stroke="#09090B"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
-            ))}
+                  {genre.name}
+                  <svg
+                    width="5"
+                    height="9"
+                    viewBox="0 0 5 9"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0.5 8.5L4.5 4.5L0.5 0.5"
+                      stroke="#09090B"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </Link>
+              ))}
+            </div>
+            <div className="border-l-1 border border-[#E4E4E7] "></div>
+            <div className="grid grid-cols-4 grid-rows-2 gap-10">
+              {movieSearch.slice(0, 12).map((movie) => (
+                <Card key={movie.id} upcom={movie} size="w-[280px]" />
+              ))}
+            </div>
           </div>
-          <div className="border-l-1 border border-[#E4E4E7] "></div>
-          <div className="grid grid-cols-4 grid-rows-2 gap-10">
-            {movieSearch.slice(0, 12).map((movie) => (
-              <Card key={movie.id} upcom={movie} size="w-[280px]" />
-            ))}
-          </div>
+          <PaginationDemo page={page} setPage={setPage} />
         </div>
-        <PaginationDemo page={page} setPage={setPage} />
       </div>
       <Footer />
     </div>

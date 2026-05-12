@@ -8,10 +8,9 @@ type StarProps = {
   color: string;
   tfont: string;
   tcolor: string;
-  weight: string;
 };
 
-export const Star = ({ font, color, tfont, size, tcolor, star, weight }: StarProps) => {
+export const Star = ({ font, color, tfont, size, tcolor, star }: StarProps) => {
   return (
     <div className="flex gap-1 items-center p-2">
       <svg
@@ -30,7 +29,7 @@ export const Star = ({ font, color, tfont, size, tcolor, star, weight }: StarPro
         />
       </svg>
       <p className="text-center">
-        <span className={`${font} ${color} ${weight}`}>{star?.toFixed(1)}</span>
+        <span className={`${font} ${color} `}>{star?.toFixed(1)}</span>
         <span className={`${tfont} ${tcolor}`}>/10</span>
       </p>
     </div>
