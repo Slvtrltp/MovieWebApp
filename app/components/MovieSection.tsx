@@ -1,13 +1,6 @@
 "use client";
-
-import React from "react";
-
-import Image from "next/image";
-
 import { useEffect, useState } from "react";
-
 import axios from "axios";
-
 import Link from "next/link";
 import { Movie } from "../types";
 import { Card } from "./Card";
@@ -49,10 +42,10 @@ export const MovieSection = () => {
       <div className="w-full h-full flex items-center flex-col container">
         <div className="flex justify-between  w-full h-60 items-end">
           <div className="flex justify-start w-full  h-60 items-center  text-[24px] font-semibold">
-            movieing
+            Upcoming
           </div>
           <Link
-            href={`/seemore/movieing`}
+            href={`/seemore/upcoming`}
             className="cursor-pointer pb-10 w-30 flex items-center gap-2 transition-all duration-300 group-hover:w-full"
           >
             <p className="group relative inline-block transition-all duration-300">

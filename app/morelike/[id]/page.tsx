@@ -14,7 +14,6 @@ export default function Page() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    // Хэрэв id нь "id" гэсэн текст байвал эсвэл хоосон бол хүсэлт явуулахгүй
     if (!id || id === "id") return;
 
     axios

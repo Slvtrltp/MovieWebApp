@@ -23,21 +23,6 @@ export default function Home() {
     }
   };
 
-  const PageInfo = {
-    upcoming: {
-      url: "/movie/upcoming",
-      title: "Upcoming",
-    },
-    popular: {
-      url: "/movie/",
-      title: "popular",
-    },
-    "top-rated": {
-      url: "/movie/top_rated",
-      title: "top-rated",
-    },
-  };
-
   useEffect(() => {
     if (!type) return;
 
