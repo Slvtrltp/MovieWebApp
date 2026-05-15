@@ -58,7 +58,8 @@ export default function Home() {
                 {movie?.original_title}
               </h1>
               <p>
-                {movie?.release_date}, {formatRuntime(movie?.runtime)}
+                {movie?.release_date},{" "}
+                {movie?.runtime && formatRuntime(movie.runtime)}
               </p>
             </div>
             <div className="">
@@ -70,7 +71,6 @@ export default function Home() {
                 color="text-black"
                 tfont="text-[16px]"
                 tcolor="text-[#71717A]"
-                weight="font-semibold"
               />
               <li className="pl-2 text-[#71717A] text-[12px]">
                 {movie?.vote_count}k
@@ -142,7 +142,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-5 w-[2100px] w-fit  mt-8 gap-11">
             {more.slice(0, 5).map((more) => (
-              <Card upcom={more} key={more.id} size="w-70" />
+              <Card movie={more} key={more.id} size="w-70" />
             ))}
           </div>
         </div>

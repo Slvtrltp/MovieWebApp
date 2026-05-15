@@ -10,6 +10,7 @@ import {
 type Props = {
   page: number;
   padding: string;
+  setPage: (page: number) => void;
 };
 
 export const PaginationDemo = ({ page, setPage, padding }: Props) => {

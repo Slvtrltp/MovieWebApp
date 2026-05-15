@@ -1,5 +1,5 @@
 import React from "react";
-import { Movie, MovieSearch } from "../types";
+import { Movie,} from "../types";
 
 type StarProps = {
   font: string;

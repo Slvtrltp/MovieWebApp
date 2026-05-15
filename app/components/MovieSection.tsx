@@ -13,7 +13,7 @@ import { Movie } from "../types";
 import { Card } from "./Card";
 
 export const MovieSection = () => {
-  const [upcoming, setUpcoming] = useState<Movie[]>([]);
+  const [movieing, setmovieing] = useState<Movie[]>([]);
   const [popular, setPopular] = useState<Movie[]>([]);
   const [topRated, setTopRated] = useState<Movie[]>([]);
 
@@ -23,7 +23,7 @@ export const MovieSection = () => {
         `https://api.themoviedb.org/3/movie/upcoming?api_key=d67d8bebd0f4ff345f6505c99e9d0289`,
       )
       .then((res) => {
-        setUpcoming(res.data.results);
+        setmovieing(res.data.results);
       });
   }, []);
   useEffect(() => {
@@ -49,10 +49,10 @@ export const MovieSection = () => {
       <div className="w-full h-full flex items-center flex-col container">
         <div className="flex justify-between  w-full h-60 items-end">
           <div className="flex justify-start w-full  h-60 items-center  text-[24px] font-semibold">
-            Upcoming
+            movieing
           </div>
           <Link
-            href={`/seemore/upcoming`}
+            href={`/seemore/movieing`}
             className="cursor-pointer pb-10 w-30 flex items-center gap-2 transition-all duration-300 group-hover:w-full"
           >
             <p className="group relative inline-block transition-all duration-300">
@@ -78,8 +78,8 @@ export const MovieSection = () => {
           </Link>
         </div>
         <div className="grid grid-cols-5 grid-rows-2 gap-10 container">
-          {upcoming.slice(0, 10).map((upcom) => (
-            <Card key={upcom.id} upcom={upcom} size="w-full" />
+          {movieing.slice(0, 10).map((movie) => (
+            <Card key={movie.id} movie={movie} size="w-full" />
           ))}
         </div>
         <div className="flex justify-between w-full h-60 items-end">
@@ -113,8 +113,8 @@ export const MovieSection = () => {
           </Link>
         </div>
         <div className="grid grid-cols-5 grid-rows-2 gap-10 container">
-          {popular.slice(0, 10).map((upcom) => (
-            <Card key={upcom.id} upcom={upcom} size="w-full" />
+          {popular.slice(0, 10).map((movie) => (
+            <Card key={movie.id} movie={movie} size="w-full" />
           ))}
         </div>
         <div className="flex justify-between  w-full h-60 items-end">
@@ -148,8 +148,8 @@ export const MovieSection = () => {
           </Link>
         </div>
         <div className="grid grid-cols-5 grid-rows-2 gap-10 container">
-          {topRated.slice(0, 10).map((upcom) => (
-            <Card key={upcom.id} upcom={upcom} size="w-full" />
+          {topRated.slice(0, 10).map((movie) => (
+            <Card key={movie.id} movie={movie} size="w-full" />
           ))}
         </div>
       </div>

@@ -3,7 +3,7 @@ import { Card } from "@/app/components/Card";
 import { Footer } from "@/app/components/Footer";
 import { Navigation } from "@/app/components/Navigation";
 import { PaginationDemo } from "@/app/components/Pagination";
-import { Genres, Movie, MovieSearch } from "@/app/types";
+import { Genres, Movie } from "@/app/types";
 import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 export default function Page() {
   const [genres, setGenres] = useState<Genres[]>([]);
 
-  const [movieSearch, setMovieSearch] = useState<MovieSearch[]>([]);
+  const [movieSearch, setMovieSearch] = useState<Movie[]>([]);
   const params = useParams();
   const searchId = decodeURIComponent(params.id as string);
   const [page, setPage] = useState(1);
@@ -46,7 +46,7 @@ export default function Page() {
           <h1 className="text-[30px] font-semibold">Search results</h1>
           <div className="flex justify-end">
             <p className="text-[20px] font-semibold">
-              {totalResults} results for "{searchId}"
+              {totalResults} results for &quot;{searchId}&quot;
             </p>
           </div>
           <div className="flex gap-5">
@@ -78,11 +78,11 @@ export default function Page() {
             <div className="border-l-1 border border-[#E4E4E7] "></div>
             <div className="grid grid-cols-4 grid-rows-2 gap-10">
               {movieSearch.slice(0, 12).map((movie) => (
-                <Card key={movie.id} upcom={movie} size="w-[280px]" />
+                <Card key={movie.id} movie={movie} size="w-[280px]" />
               ))}
             </div>
           </div>
-          <PaginationDemo page={page} setPage={setPage} />
+          <PaginationDemo page={page} setPage={setPage} padding={""} />
         </div>
       </div>
       <Footer />

@@ -1,19 +1,18 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Link from "next/link";
 import axios from "axios";
-import { Genres, Movie, MovieSearch } from "@/app/types";
+import { Genres, Movie } from "@/app/types";
 
 import { Card } from "@/app/components/Card";
 import { Footer } from "@/app/components/Footer";
 
-import { Star } from "@/app/components/Star";
 import { Navigation } from "@/app/components/Navigation";
 import { PaginationDemo } from "@/app/components/Pagination";
 
 export default function Home() {
   const [movies, setMovies] = useState<Movie[]>([]);
+
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
 
   const [genres, setGenres] = useState<Genres[]>([]);
@@ -23,20 +22,18 @@ export default function Home() {
   const [totalResults, setTotalResults] = useState<number>(0);
 
   const toggleGenre = (genreId: number) => {
-    setSelectedGenres(
-      (prev) =>
-        prev.includes(genreId)
-          ? prev.filter((id) => id !== genreId) 
-          : [...prev, genreId],
+    setSelectedGenres((prev) =>
+      prev.includes(genreId)
+        ? prev.filter((id) => id !== genreId)
+        : [...prev, genreId],
     );
     setPage(1);
   };
   useEffect(() => {
     if (id) {
       const genreId = Number(id);
-
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedGenres([genreId]);
-
       setPage(1);
     }
   }, [id]);
@@ -48,11 +45,8 @@ export default function Home() {
       .then((res) => setGenres(res.data.genres));
   }, []);
 
-  // Navigation-аас шилжих үед: Өмнөх сонголтуудыг цэвэрлэж зөвхөн нэгийг идэвхжүүлнэ
-
   useEffect(() => {
     const fetchMoviesByGenres = async () => {
-      // Хэрэв ямар ч төрөл сонгоогүй бол хоосон массив буцаахгүй байхын тулд
       const genreString = selectedGenres.join(",");
 
       try {
@@ -94,7 +88,7 @@ export default function Home() {
           <div className="flex gap-7">
             <div className="grid grid-cols-4 grid-rows-2 gap-10 pr-3 pt-23">
               {movies.slice(0, 12).map((movie) => (
-                <Card key={movie.id} upcom={movie} size="w-64" />
+                <Card key={movie.id} movie={movie} size="w-64" />
               ))}
             </div>
             <div className="border-l-1 border border-[#E4E4E7] "></div>
@@ -103,28 +97,27 @@ export default function Home() {
               <p className="pb-5">See lists of movies by genre</p>
               <div className="flex flex-wrap gap-4 w-[350px] h-[200px]">
                 {genres.map((genre) => {
-                  const isActive = selectedGenres.includes(genre.id); // Сонгогдсон эсэхийг шалгах
+                  const isActive = selectedGenres.includes(genre.id);
                   return (
                     <button
                       onClick={() => toggleGenre(genre.id)}
                       key={genre.id}
                       className={`h-6 border border-[#E4E4E7] rounded-full flex justify-center items-center cursor-pointer duration-300 text-xs font-semibold py-0.5 pl-2.5 pr-2 gap-1 ${
                         isActive
-                          ? "bg-black text-white border-primary" // bg-black-ийн оронд primary ашиглах
+                          ? "bg-black text-white border-primary"
                           : "border-border text-foreground hover:bg-accent"
                       }`}
                     >
                       {genre.name}
 
                       {isActive && <span>✕</span>}
-                      {/* Хасах тэмдэг харуулж болно */}
                     </button>
                   );
                 })}
               </div>
             </div>
           </div>
-          <PaginationDemo page={page} setPage={setPage} />
+          <PaginationDemo page={page} setPage={setPage} padding={""} />
         </div>
       </div>
       <Footer />

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Genres, Movie, MovieDetails, MovieSearch } from "../types";
+import { Genres, Movie } from "../types";
 import { Star } from "./Star";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -10,7 +10,7 @@ import { useTheme } from "next-themes";
 export const Navigation = () => {
   const [genres, setGenres] = useState<Genres[]>([]);
   const [isVisible, setIsVisible] = useState(false);
-  const [movieSearch, setMovieSearch] = useState<MovieSearch[]>([]);
+  const [movieSearch, setMovieSearch] = useState<Movie[]>([]);
   const [search, setSearch] = useState<string>("");
   const router = useRouter();
   const { theme, setTheme } = useTheme();
@@ -33,7 +33,7 @@ export const Navigation = () => {
   }, [search]);
 
   return (
-    <div className="flex flex-col items-center py-[25px] dark:bg-black">
+    <div className="flex flex-col items-center py-6.25 dark:bg-black">
       <div className="  mx-auto container">
         <div className="flex justify-between items-center ">
           {theme === "dark" ? (
@@ -193,7 +193,7 @@ export const Navigation = () => {
               </div>
             ) : (
               <div
-                className={`w-[577px] bg-white border border-[#E4E4E7] rounded-lg min-h-[128] absolute z-2 top-13 p-3 ${search.length > 0 ? "visible" : "invisible"}`}
+                className={`w-144.25 bg-white border border-[#E4E4E7] rounded-lg min-h-[128] absolute z-2 top-13 p-3 ${search.length > 0 ? "visible" : "invisible"}`}
               >
                 {movieSearch.slice(0, 5).map((movie) => (
                   <Link
@@ -203,7 +203,7 @@ export const Navigation = () => {
                   >
                     <img
                       src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                      className="h-[100px] w-[67px] object-cover transition-transform group-hover:scale-105 rounded-md"
+                      className="h-25 w-16.75 object-cover transition-transform group-hover:scale-105 rounded-md"
                     />
 
                     <div className="space-y-3">

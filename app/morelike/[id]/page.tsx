@@ -27,7 +27,7 @@ export default function Page() {
       .catch((err) => {
         console.error("Дата татахад алдаа гарлаа:", err);
       });
-  }, [id, page]); // id өөрчлөгдөх бүрд ажиллана
+  }, [id, page]);
   return (
     <div>
       <Navigation />
@@ -38,11 +38,11 @@ export default function Page() {
           <div className="grid grid-cols-5 w-[2100px] w-fit gap-11  mt-8 ">
             {" "}
             {more.slice(0, 10).map((movie) => (
-              <Card upcom={movie} key={movie.id} size="w-70" />
+              <Card movie={movie} key={movie.id} size="w-70" />
             ))}
           </div>
           <div className="">
-            <PaginationDemo page={page} setPage={setPage} />
+            <PaginationDemo page={page} setPage={setPage} padding={""} />
           </div>
         </div>
       </div>

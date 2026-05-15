@@ -2,9 +2,9 @@ import React from "react";
 
 export const Footer = () => {
   return (
-    <div className="w-full h-[300px] mt-28 bg-[#4338CA] flex items-center gap-30 justify-around  dark:bg-black">
+    <div className="w-full h-75 mt-28 bg-[#4338CA] flex items-center gap-30 justify-around  dark:bg-black">
       <div className="container flex items-center">
-        <div className=" h-[200px] w-[247px] space-y-4 c">
+        <div className=" h-50 w-61.75 space-y-4 c">
           <div className="flex gap-2 items-center">
             <svg
               width="20"
@@ -26,7 +26,7 @@ export const Footer = () => {
           <p className="text-white">© 2024 Movie Z. All Rights Reserved.</p>
         </div>
         <div className="flex justify-end gap-48">
-          <div className="w-[900px] h-[200px]">
+          <div className="w-225 h-50">
             <p className="text-white pb-3">Contact Information</p>
             <div className="flex items-center gap-2 pb-6">
               <svg

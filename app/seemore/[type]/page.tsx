@@ -1,18 +1,11 @@
 "use client";
-import Image from "next/image";
 import { Navigation } from "@/app/components/Navigation";
-import { Upcoming } from "@/app/components/Upcoming";
-
 import { useEffect, useState } from "react";
-
 import axios from "axios";
 import { Card } from "@/app/components/Card";
 import { Footer } from "@/app/components/Footer";
 import { Movie } from "@/app/types";
-
-import { title } from "process";
 import { useParams } from "next/navigation";
-import { Pagination } from "@/components/ui/pagination";
 import { PaginationDemo } from "@/app/components/Pagination";
 
 export default function Home() {
@@ -70,11 +63,11 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-5 grid-rows-2 gap-10">
               {movies.slice(0, 10).map((movie) => (
-                <Card key={movie.id} upcom={movie} size="w-70" />
+                <Card key={movie.id} movie={movie} size="w-70" />
               ))}
             </div>
           </div>
-          <PaginationDemo page={page} setPage={setPage} />
+          <PaginationDemo page={page} setPage={setPage} padding={""} />
         </div>
       </div>
       <Footer />
