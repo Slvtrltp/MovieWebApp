@@ -3,7 +3,7 @@ import React from "react";
 export const Footer = () => {
   return (
     <div className="w-full h-75 mt-28 bg-[#4338CA] flex items-center justify-around  dark:bg-black">
-      <div className="container flex items-center py-[60px] w-full flex  justify-evenly items-start gap-[540px] text-white mt-10 bg-[#4338CA] dark:bg-black ">
+      <div className="container flex items-center  w-full flex  justify-evenly items-start gap-[540px] text-white mt-10 bg-[#4338CA]dark:bg-black ">
         <div className=" h-50 w-61.75 space-y-4 c">
           <div className="flex gap-2 items-center">
             <svg
