@@ -70,7 +70,7 @@ export const MovieSection = () => {
             </span>
           </Link>
         </div>
-        <div className="grid grid-cols-5 grid-rows-2 gap-10 container">
+        <div className="grid grid-cols-5 grid-rows-2 gap-5 container">
           {movieing.slice(0, 10).map((movie) => (
             <Card key={movie.id} movie={movie} size="w-full" />
           ))}
@@ -105,7 +105,7 @@ export const MovieSection = () => {
             </span>
           </Link>
         </div>
-        <div className="grid grid-cols-5 grid-rows-2 gap-10 container">
+        <div className="grid grid-cols-5 grid-rows-2 gap-5 container">
           {popular.slice(0, 10).map((movie) => (
             <Card key={movie.id} movie={movie} size="w-full" />
           ))}
@@ -140,7 +140,7 @@ export const MovieSection = () => {
             </span>
           </Link>
         </div>
-        <div className="grid grid-cols-5 grid-rows-2 gap-10 container">
+        <div className="grid grid-cols-5 grid-rows-2 gap-5 container">
           {topRated.slice(0, 10).map((movie) => (
             <Card key={movie.id} movie={movie} size="w-full" />
           ))}
