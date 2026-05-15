@@ -53,7 +53,7 @@ export const SwiperM = ({ trend }: { trend: Movie }) => {
         />
       </Link>
 
-      <div className="absolute left-85 z-2 gap-4 top-60 max-[768px]:left-43  ">
+      <div className="absolute left-55 z-2 gap-4 top-60 max-[768px]:left-15  ">
         <div>
           <p className="text-[18px] text-white">Now Playing:</p>
           <Link
